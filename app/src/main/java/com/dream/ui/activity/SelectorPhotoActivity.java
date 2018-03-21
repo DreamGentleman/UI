@@ -16,10 +16,12 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.dream.ui.R;
 import com.dream.ui.adapter.PhotoAdapter;
+import com.dream.ui.widget.GifSizeFilter;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.filter.Filter;
 
 import java.util.List;
 
@@ -29,7 +31,6 @@ public class SelectorPhotoActivity extends AppCompatActivity implements View.OnC
 
     protected Button btn;
     protected GridView gv;
-    protected ImageView iv;
     private PhotoAdapter adapter;
 
     @Override
@@ -51,7 +52,8 @@ public class SelectorPhotoActivity extends AppCompatActivity implements View.OnC
                                 .choose(MimeType.allOf())
                                 .countable(true)
                                 .maxSelectable(9)
-                                .gridExpectedSize(200)
+                                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                                .gridExpectedSize(500)
                                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                                 .thumbnailScale(0.85f)
                                 .imageEngine(new GlideEngine())
@@ -68,7 +70,6 @@ public class SelectorPhotoActivity extends AppCompatActivity implements View.OnC
         gv = (GridView) findViewById(R.id.gv);
         adapter = new PhotoAdapter(this);
         gv.setAdapter(adapter);
-        iv = (ImageView) findViewById(R.id.iv);
     }
 
     @Override
@@ -76,10 +77,6 @@ public class SelectorPhotoActivity extends AppCompatActivity implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK) {
             List<Uri> uris = Matisse.obtainResult(data);
-            Glide.with(this).load(uris.get(0)).into(iv);
-            for (Uri uri : uris) {
-                Log.e("onActivityResult: ", uri.toString());
-            }
             adapter.setPhotos(Matisse.obtainResult(data));
         }
     }
