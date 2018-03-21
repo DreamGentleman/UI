@@ -1,13 +1,37 @@
 package com.dream.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.dream.ui.activity.BaseActivity;
+import com.dream.ui.activity.SelectorPhotoActivity;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+    protected Button btnRecycle;
+    protected Button btnPhoto;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.activity_main);
+        initView();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btn_recycle) {
+
+        } else if (view.getId() == R.id.btn_photo) {
+            SelectorPhotoActivity.start(this);
+        }
+    }
+
+    private void initView() {
+        btnRecycle = (Button) findViewById(R.id.btn_recycle);
+        btnRecycle.setOnClickListener(MainActivity.this);
+        btnPhoto = (Button) findViewById(R.id.btn_photo);
+        btnPhoto.setOnClickListener(MainActivity.this);
     }
 }
