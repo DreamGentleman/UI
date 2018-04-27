@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.RecyclerActivity" />
-        <activity android:name=".activity.SelectorPhotoActivity"></activity>
+        <activity android:name=".activity.SelectorPhotoActivity" />
+        <activity android:name=".activity.MiSelectorDateActivity"></activity>
     </application>
 
 </manifest>

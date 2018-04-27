@@ -11,6 +11,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     protected Button btnRecycle;
     protected Button btnPhoto;
+    protected Button btnSelectorDate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         } else if (view.getId() == R.id.btn_photo) {
             SelectorPhotoActivity.start(this);
+        } else if (view.getId() == R.id.btn_selector_date) {
+
         }
     }
 
@@ -33,5 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnRecycle.setOnClickListener(MainActivity.this);
         btnPhoto = (Button) findViewById(R.id.btn_photo);
         btnPhoto.setOnClickListener(MainActivity.this);
+        btnSelectorDate = (Button) findViewById(R.id.btn_selector_date);
+        btnSelectorDate.setOnClickListener(MainActivity.this);
     }
 }
